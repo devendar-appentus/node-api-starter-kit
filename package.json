@@ -30,13 +30,13 @@
   "licenses": "MIT",
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
     "compression": "^1.6.2",
     "cookie-parser": "~1.4.3",
-    "cors": "^2.8.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "forever": "^0.15.3",
@@ -45,9 +45,12 @@
     "knex": "^0.12.9",
     "morgan": "~1.9.1",
     "mysql": "^2.13.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.18",
     "redis-connection-manager": "^1.0.1",
     "request": "^2.81.0",
     "require-all": "^2.2.0",
+    "sequelize": "^6.21.2",
     "serve-favicon": "~2.4.2",
     "socket.io": "^2.2.0",
     "socket.io-redis": "^5.2.0",

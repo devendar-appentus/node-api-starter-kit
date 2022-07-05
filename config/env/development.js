@@ -17,22 +17,52 @@ module.exports = {
     debug: false
   },
 
-  redis: {
-    url: "localhost",
-    port: '6379',
-    database: '1',
-    password: 'password',
+  Sql: {
+    HOST: "localhost",
+    USER: "root",
+    PASSWORD: "",
+    DB: "test",
+    dialect: "mysql",
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   },
 
-  socket: {
-    client_host: 'http://localhost',
-    client_port: 1438, //default port, process_number is added to this port when initializing/connecting to socket via pm2,
-    namespace: 'namespace',
-    //redis configs for socket.io redis adapter
-    redis: {
-      url: "localhost",
-      port: '6379',
-      password: 'password'
-    }
-  }
+  // redis: {
+  //   url: "localhost",
+  //   port: '6379',
+  //   database: '1',
+  //   password: 'password',
+  // },
+
+  // socket: {
+  //   client_host: 'http://localhost',
+  //   client_port: 1438, //default port, process_number is added to this port when initializing/connecting to socket via pm2,
+  //   namespace: 'namespace',
+  //   //redis configs for socket.io redis adapter
+  //   redis: {
+  //     url: "localhost",
+  //     port: '6379',
+  //     password: 'password'
+  //   }
+  // }
 };
+
+// module.exports = {
+//   Sql: {
+//     HOST: "localhost",
+//     USER: "username",
+//     PASSWORD: "password",
+//     DB: "testdb",
+//     dialect: "mysql",
+//     pool: {
+//       max: 5,
+//       min: 0,
+//       acquire: 30000,
+//       idle: 10000
+//     }
+//   }
+// }

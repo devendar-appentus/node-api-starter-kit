@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express()
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,22 +9,24 @@ var cors = require("cors");
 var compression = require("compression");
 var helmet = require("helmet");
 var Utils = require('./src/services/Utils');
+var lib = require('./lib/db')
+
 
 //require custom-responses module so that custom responses (by default present in src/responses folder) are available project wide
 require('./lib/custom-response')();
 
 var v1Routes = require('./config/routes/v1');
-
-var app = express();
+const user = require('./config/routes/test');
 
 //Middleware for logging requests (optional)
 app.use(logger('dev'));
 
 //parse application/json
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({ limit: '50mb' }));
+// app.use(express.json());
 
 //parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -39,10 +42,10 @@ app.options('*', cors());
 app.use(compression());
 
 //Routing
-app.use('/v1/', v1Routes);
+app.use('/api/v1', v1Routes, user);
 
 // if no routes found, catch 404 and return error response
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var response = {
     statusCode: 404,
     error: {
@@ -55,7 +58,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler in case of parsing/other errors not handled by controllers
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   var response = {
     statusCode: err.status || 500,
     error: {
@@ -67,10 +70,10 @@ app.use(function(err, req, res, next) {
   return res.error(response);
 });
 
-app.set('port', process.env.PORT || 1337);
+app.set('port', process.env.PORT || 7000);
 
 var server = app.listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + server.address().port+" Environment: ",process.env.ENV);
+  console.log('Express server listening on port ' + server.address().port + " Environment: ", process.env.ENV);
 });
 
 /**
